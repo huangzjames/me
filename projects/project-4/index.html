@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/projects/project-4/"><!-- Primary Meta Tags --><title>Career Coach 复盘：当方法论掉进真实场景 | JAMES</title><meta name="title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta name="description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="og:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="og:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="twitter:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="twitter:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.ByOTl-8k.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> JAMES </div>  </a> <nav class="flex gap-1"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+项目
+ </a> <span> / </span> <a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+文章
+ </a> <span> / </span> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+经历
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+返回
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-05-19T00:00:00.000Z"> May 19, 2026 </time> </div>
+&bull;
+<div class="font-base text-sm"> 1 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> Career Coach 复盘：当方法论掉进真实场景 </div>  </div> <article class="animate"> <p>想象你每周五下午固定去见一位私人顾问。</p>
+<p>电梯直达顶层，走廊铺着深色地毯，安静得只剩空调的低鸣。前台不用问就叫出了你的名字，把你引进一间光线柔和的会议室。桌上提前摆好了温水、纸笔，和一个印着你名字的厚实案卷。第一次见面，他花了整整两个小时，耐心地把你的职业困境、过往履历、甚至绝对不想碰的行业方向，全都记进了那个案卷里。</p>
+<p>离开时你觉得安心——付出的时间、信息和信任，看起来都被妥善存放了。</p>
+<p>第二周你再去，他微笑着翻开一张白纸：“那么，我们先从你的基本情况聊起吧。”
+第三周，他终于翻开了案卷，却认真地拿出一份上周已经被你否决的方案，重新分析它的可行性。
+第四周，你随口提了一句”也许可以转型做销售”，他立刻陪你兴致勃勃地推演了一个小时。走出大楼你才惊觉，今天原本是要拍板下周的面试策略。</p>
+<p>这种经历有一种温和的荒诞感。他并不笨，态度也好，每句话听起来都很专业。但这段关系没有长出记忆——每次碰面，都更像一次原地重启。</p>
+<p>这几乎也是把 AI Agent 从单次问答拉进一段长期协作时，会遇到的真实处境。</p>
+<hr>
+<p>在我的求职阶段，需要同时推进目标岗位筛选、简历迭代、项目经历包装和面试准备，彼此之间还互相牵扯。我搭了一个专属的 Career Coach 来处理这条长链路。</p>
+<p>我在开源项目和 coding agent 的实践分享里读到过不少做法。这些思路听起来都有道理。Career Coach 对我来说有意思的地方在于，我真的把它们放进了一个持续好几个月的具体场景里——然后看到了它们生效的方式，和开始失效的边界。</p>
+<hr>
+<h2 id="工作台与抽屉">工作台与抽屉</h2>
+<p>为了让 Coach 更懂我的判断倾向，一开始我往里面塞了不少资料：产品趋势分析、行业洞察、觉得有意思的岗位描述。看到有启发的内容就摘下来，写上自己的想法和疑问，心想如果这些材料都能被 Coach 读到，它帮我改简历、调项目叙述的时候应该能更准。</p>
+<p>但材料一多，干扰就来了。一篇前几天看来颇有启发的长文，本该只留在背景里，AI 却会在今天写简历时顺手化用里面的观点，把方向带偏。资料进入了系统，不等于系统知道什么时候该用它——如果一盘菜加了十三种酱汁，最后呈现的只会是混乱。</p>
+<p>后来我做了一道隔断：只有经过我判断、确认和当前阶段强相关的核心信息，才放上工作台；其余的必须安静地留在抽屉里备查。</p>
+<p>这道隔断还得延伸到顾问自己的记忆上。还是那个画面：你的案卷越来越厚，但如果顾问每次见面都从第一页翻起——包括你三个月前已经放弃的方向、两个月前随口一提的念头——他翻得越仔细，你反而越困惑。后来我把系统的记忆分成了两层：厚案卷照常归档，但每次见面前桌上只摆一页纸——当前目标、本周计划、上次停在哪。</p>
+<p>原本以为长期记忆的关键是存得全。后来发现，当系统手里的线索越来越多，决定这一刻”不看什么”反而比”看什么”更难。</p>
+<hr>
+<h2 id="空白输入框前的迷失">空白输入框前的迷失</h2>
+<p>还有一个问题藏在交互形式本身里。</p>
+<p>纯聊天式的 Agent 界面天然缺乏方向感。每次隔几天重新坐回屏幕前，面对一个空白输入框，我常常愣一下：上次聊到哪了？今天该推进什么？就像读档之后没有任何任务提示的游戏——玩家只会站在地图中央发呆。</p>
+<p>后来我在系统里加了一张轻量的”状态卡”：每次对话开始前，先让 AI 告诉当前的我，我们进行到哪一阶段、今天该聚焦什么、当前可以调用哪些能力。它不长，刻意保持简短，因为 AI 已经很擅长长篇输出了——长到一定程度，信息本身就会变成噪声，污染人的注意力。</p>
+<p>这张卡片本质上是我在纯对话系统里给自己加的一层最小导航。当 AI 的能力变得越来越发散，如果系统不主动维系方向感，用户很快就会淹没在无边际的对话里。</p>
+<hr>
+<h2 id="后厨备注不是菜">后厨备注不是菜</h2>
+<p>让 AI 执行前先写计划，是一个被广泛采用的做法。不少 coding agent 在动手前会先输出一份执行方案，列出要改什么、分几步走。我也试过把 Coach 拆成策略层和执行层：先讨论方向和要点，确认之后再动手写。</p>
+<p>这个方法管用，但有一个我没预料到的副作用。</p>
+<p>有一次我让 Coach 起草一份面向外部读者的项目介绍。它读了大量内部材料——包括我和 AI 之间讨论这个项目”该怎么定位""该规避哪些误解""该对外强调什么”的对话记录——然后写出来的东西像一份内部写作指南：不是在介绍这个项目做了什么，而是在解释”这个项目应该被包装成什么样”。策略分析、受众判断、叙事偏好，全都出现在了正文里。</p>
+<p>这就像餐厅服务员端上桌的不是菜，而是一张后厨备料说明——上面写着”本菜品应呈现现炒风味，避免让顾客尝出预制感”。信息没错，但它是给做菜的人看的，不该端到客人面前。</p>
+<p>对 AI 来说，内部讨论和外部正文都在同一个上下文窗口里，它没有动机区分哪些是过程、哪些是产物。这个区分得靠产品结构来做。后来碰到面向外部读者的写作任务，我会在开始前先定下：给谁看、用在哪、哪些素材只属于内部参考——把内部思考关在厨房里。</p>
+<hr>
+<h2 id="精致的死胡同">精致的死胡同</h2>
+<p>Career Coach 跑了一段时间之后，最隐蔽的一种失效，不是 AI 答错了什么，而是一种”一直在推进”的错觉。</p>
+<p>有一阵子我很容易在使用过程中岔进新想法：标题要不要换个写法、某段措辞要不要调、某个模块要不要重新想一下。AI 每次都接住了，每次都给出细致的讨论。对话记录很长，文档改了一版又一版。但几周下来，求职本身的进度很慢——大量时间被花在了旁枝末节上，主线没有明显往前走。</p>
+<p>这种问题特别隐蔽，因为它不像事实错误或者幻觉那样露馅。它甚至会制造一种充实感：产出很多，讨论很深入，细节越来越精致。</p>
+<p>更微妙的是，这不完全是 AI 的问题。打磨细节比面对不确定性舒服得多。但 AI 的角色放大了这种倾向——它不会说”这个方向你已经磨了三周了，要不要先把投递推出去”。它总是接住每一个新想法，陪你展开，让拖延看起来像精益求精。</p>
+<p>我后来加了一个做法：新对话开始时，不默认把上一轮的所有结论当成既定事实，而是先带着审计的视角重新看一遍——方向还对吗？是在推主线，还是在绕弯？有没有在回避什么更重要的事？短任务中，顺滑体验通常是好事；但持续几周的任务里，过度配合有时候会把人一路带进一个精致的死胡同。</p>
+<hr>
+<p>我没有在 Career Coach 里发明什么新方法。上下文管理、计划先行、状态追踪、外部审计——这些概念散落在很多人的实践和开源文档里。但读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离。有些做法落地后才发现需要配一套额外规则，有些边界不是调 prompt 能修的，得靠产品结构来兜。</p>
+<p>当外界都在讨论工具应该接入多少文件、拥有多长记忆的时候，我在自己这套系统里更多在处理的，反而是怎么拦截干扰、抑制顺从、藏起那些喧宾夺主的思考过程。</p>
+<p>最好的体验可能不是它显得多渊博、多聪明——而是下一次我再走进那间会议室时，对面的人翻开本子，看了一眼我们昨天停下的地方，平静地开口：</p>
+<p>“上次的部分已经落定了。今天我们继续往下走。”</p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+回到顶部
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2026 | JAMES </div> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/blog/12-%E5%BD%93-agent-%E6%88%90%E4%B8%BA%E6%A0%87%E9%85%8D%E4%BA%A7%E5%93%81%E7%9C%9F%E6%AD%A3%E4%BA%89%E4%BB%80%E4%B9%88/"><!-- Primary Meta Tags --><title>当 Agent 成为标配，产品真正争什么 | JAMES</title><meta name="title" content="当 Agent 成为标配，产品真正争什么 | JAMES"><meta name="description" content="功能可以趋同，可信供给、服务流程和任务反馈更难复制"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/blog/12-%E5%BD%93-agent-%E6%88%90%E4%B8%BA%E6%A0%87%E9%85%8D%E4%BA%A7%E5%93%81%E7%9C%9F%E6%AD%A3%E4%BA%89%E4%BB%80%E4%B9%88/"><meta property="og:title" content="当 Agent 成为标配，产品真正争什么 | JAMES"><meta property="og:description" content="功能可以趋同，可信供给、服务流程和任务反馈更难复制"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/blog/12-%E5%BD%93-agent-%E6%88%90%E4%B8%BA%E6%A0%87%E9%85%8D%E4%BA%A7%E5%93%81%E7%9C%9F%E6%AD%A3%E4%BA%89%E4%BB%80%E4%B9%88/"><meta property="twitter:title" content="当 Agent 成为标配，产品真正争什么 | JAMES"><meta property="twitter:description" content="功能可以趋同，可信供给、服务流程和任务反馈更难复制"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.ByOTl-8k.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> JAMES </div>  </a> <nav class="flex gap-1"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+项目
+ </a> <span> / </span> <a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+文章
+ </a> <span> / </span> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+经历
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/blog" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+返回
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-04-25T16:00:00.000Z"> Apr 26, 2026 </time> </div>
+&bull;
+<div class="font-base text-sm"> 2 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> 当 Agent 成为标配，产品真正争什么 </div> </div> <article class="animate"> <p>这段时间再看 Agent 产品，我对“某个产品也接入了 AI、也能上传文件、也能调用工具”这类消息，已经没有一开始那么兴奋了。</p>
+<p>不是这些能力不重要。恰恰相反，它们太重要，所以会越来越快地变成标配。</p>
+<p>一个产品能总结网页，另一个产品也能。一个产品能读文档，另一个产品也能。一个产品能生成报告、拆任务、调工具，过一阵子竞品大概率也会补上。模型能力、RAG、工具调用、文件读取、浏览器操作、代码执行，都会继续进步，也都会继续下沉。</p>
+<p>这时候，判断一个 Agent 产品有没有长期价值，就不能只看它“有没有 Agent”。</p>
+<p>更值得看的问题变成了：当这些能力逐渐趋同，产品真正争的是什么？</p>
+<p>我现在的答案是：更靠近真实任务现场的位置。</p>
+<p>所谓任务现场，不是一个新概念，也不是一个漂亮词。它就是一件事真正发生时绕不开的那些东西：可信来源、服务规则、权限、文件、会议、客户记录、人工确认、交付物、结果反馈。</p>
+<p>Agent 如果只接到其中一小块，就很容易停在“能回答”“能生成”“能演示”。只有接到这些真实材料和关系里，它才可能变成用户、机构和平台都愿意反复使用的东西。</p>
+<h2 id="第一层竞争谁能被相信">第一层竞争：谁能被相信</h2>
+<p>很多时候，用户需要的并不只是“更多信息”。他更在意的是：这条信息我能不能信。</p>
+<p>一个学校的招生政策、医院的复诊流程、培训机构的课程承诺、SaaS 产品的接入条件、旅行平台的退改规则，放到网上都能搜到一些内容。但用户真正卡住的地方往往是：这是最新的吗？这是官方口径吗？我这种情况适用吗？如果不确定，谁来负责解释？</p>
+<p>这也是我重新理解 ima 知识号、元器公众号智能体这类产品形态的原因。</p>
+<p>如果只是让 AI 读一批资料，再围绕资料问答，它和很多通用 chatbot、笔记工具、工作台产品的差异并不大。真正有意思的部分，是机构能不能把自己的可信信息、服务规则、资质、案例和人工接管方式，变成一个用户可以直接提问的服务前台。</p>
+<p>过去公众号降低的是信息发布门槛。机构不一定要自建官网，也能有一个对外展示和触达用户的地方。小程序降低的是轻服务门槛。预约、报名、取号、支付、查询，不必每家机构都从零开发 App。</p>
+<p>Agent 可能降低第三种门槛：机构如何把“我是谁、我能提供什么、规则是什么、下一步怎么办”讲清楚，并且在用户产生意向时接住他。</p>
+<p>这件事成立的前提，是信任结构要站得住。用户要看得见信息来源，知道库主是谁，知道内容什么时候更新，知道 AI 什么时候该拒答，什么时候该转给真人。</p>
+<p>否则知识号只是一个会说话的资料夹。它能提升一点查询效率，但还撑不起服务入口。</p>
+<h2 id="第二层竞争事情在哪里继续发生">第二层竞争：事情在哪里继续发生</h2>
+<p>可信信息解决的是“我该不该相信”。但一件事不会停在相信这里。</p>
+<p>用户确认规则之后，还要预约、提交材料、授权、付款、修改文件、开会、同步进度、等待结果。企业内部也是一样，会议之后要有待办，客户沟通之后要更新记录，方案讨论之后要改文档，代码生成之后要测试和 review。</p>
+<p>这就是执行型 Agent 值得看的地方。</p>
+<p>WorkBuddy、OpenClaw、Claude Code、Codex 这类产品给我的启发，不只是它们能动手，而是它们把 AI 推进了文件、桌面、代码、网页、任务和本地环境里。它们开始接近事情继续发生的地方。</p>
+<p>但这里也有一个很容易被说空的问题：不能只说“用户要放心委托”。大部分用户并不会坐在那里严肃思考“我敢不敢委托 Agent”。他只会很自然地把一些事交出去，把另一些事留在自己手里。</p>
+<p>目标清楚、低风险、可检查的任务，会最先被交出去。比如整理会议纪要、批量改格式、把资料转成表格、生成一个初稿。这些事情烦、碎、容易拖延，又不太需要复杂判断。</p>
+<p>再往前一步，就会碰到正式系统和他人关系。发邮件、改共享文档、更新客户状态、提交材料，这些任务不是不能交给 Agent，而是需要预览、确认、撤回和接管。产品要让用户看见关键差异，而不是让他猜 AI 到底动了什么。</p>
+<p>更复杂的地方在共同决策。职业方向、产品路线、品牌定位、重要汇报、谈判准备，Agent 的价值不在于替人拍板，而在于把材料、选项、风险和下一步整理到一个更容易判断的状态。</p>
+<p>越接近真实系统，信任也会从“回答靠不靠谱”变成“行为能不能被验证”。这个 Agent 是谁创建的，代表哪个用户或组织，被授权到什么范围，动过哪些文件，调用过哪些工具，关键节点有没有让人确认，出错后能不能追溯和接管，这些都会变成产品能力的一部分。</p>
+<p>这不是给产品外面再套一层风控文档。对执行型 Agent 来说，身份、授权、日志和接管机制，本身就是用户敢不敢继续使用的体验。</p>
+<p>所以执行型 Agent 的商业价值，不只是“帮用户省时间”。更大的价值是让一次任务之后留下东西：任务历史、偏好、模板、权限设置、工作流、团队规范、复用产物。</p>
+<p>一次用完就结束的 Agent，很容易被替代。越用越懂你的工作环境、越能复用你的流程、越能沉淀组织习惯的 Agent，才会慢慢长出迁移成本。</p>
+<h2 id="我自己的项目给了一个反向校准">我自己的项目给了一个反向校准</h2>
+<p>这个判断不是只从产品观察里来的。做 Career Coach 的过程中，我自己也撞到过这道边界。</p>
+<p>我一开始更像是在改造一个面向自己的长期协作 Agent：让它理解我的求职材料、目标岗位、写作历史、投递节奏和阶段判断。它确实有用，能整理 JD、接续上下文、归档材料、复盘方向，也能让我在一个漫长任务里少很多重复劳动。</p>
+<p>但它也让我看到一个很清楚的限制：通用 Agent 能帮我组织材料，不等于它能变成一个真正的垂直服务。</p>
+<p>如果一个人要为高质量求职咨询付费，他不会只关心“有没有 AI 帮我改简历”。他会关心导师有没有相关行业经验，有没有真实案例，能不能看出他的优势和弱点，能不能给压力和监督，能不能在关键节点给出真人判断，甚至能不能提供连接和推荐。</p>
+<p>这些东西不是把资料喂给 AI 就能长出来的。</p>
+<p>这反过来让我更理解机构 Agent 的机会。它不该把真人服务粗暴替掉，而应该把机构已有的专业供给、服务规则、用户材料、会议反馈和后续任务组织起来。</p>
+<p>真人负责专业判断、关系信任和最终责任。Agent 负责把服务过程里大量重复、分散、容易遗漏的部分接住。</p>
+<p>这个模式不只适用于求职。留学、法律、财税、企业软件售前、培训、医疗随访，只要同时存在专业信任、复杂规则、持续交付和大量材料，就会有类似空间。</p>
+<h2 id="平台的机会不在单个-ai-按钮">平台的机会，不在单个 AI 按钮</h2>
+<p>如果前面两个判断成立，平台型公司的机会就会更清楚。</p>
+<p>可信供给回答“依据从哪里来”。<br>
+服务接口回答“下一步在哪里发生”。<br>
+执行环境回答“动作如何推进”。<br>
+行为记录回答“出了问题能不能查清”。<br>
+任务反馈回答“下一次为什么更顺”。</p>
+<p>单独做一个 AI 按钮，很快会被模仿。单独做一个知识库问答，也很容易被新的模型能力吞掉。真正难模仿的，往往是平台长期积累下来的资源能不能被重新组织。</p>
+<p>内容账号和认证体系，可以承接可信供给。<br>
+小程序、表单、支付、客服，可以承接轻服务。<br>
+IM、企微、社群，可以承接触达和人工接管。<br>
+文档、会议、云和本地执行环境，可以承接正式任务和交付物。<br>
+身份、权限、日志和审计能力，则决定这些 Agent 能不能被组织放心地授权给真实任务。</p>
+<p>腾讯系产品给了我一个观察样本。微信里的内容与服务生态，企业沟通和办公协作工具，云和 Agent 搭建平台，再加上 ima、WorkBuddy、OpenClaw 这类新产品，分别站在不同位置。它们未必会变成同一个产品，也不需要被外部观察者写成某种内部路线图。</p>
+<p>对我真正有启发的，是这种资源组合本身。</p>
+<p>当一个平台已经拥有机构信息、用户关系、服务接口、办公材料和执行环境，它做 Agent 的想象力就不只来自模型，而来自旧资源被重新调度之后的杠杆。</p>
+<p>更进一步，数据飞轮也会换位置。</p>
+<p>聊天数据当然重要，但执行型 Agent 更稀缺的数据，是任务怎么被发起、怎么被拆解、调用了哪些工具、哪一步失败、用户在哪里打断或纠错、最后哪些结果被采纳、哪些流程被复用。</p>
+<p>机构 Agent 也一样。用户反复问什么，哪些问题需要转人工，哪些回答带来预约或购买，哪些资料经常缺失，哪些服务承诺容易被误解，这些反馈会反过来帮助机构补资料、改流程、训练客服和优化转化。</p>
+<p>这些才是任务现场里的学习。</p>
+<h2 id="我会怎样判断一个-agent-产品">我会怎样判断一个 Agent 产品</h2>
+<p>把判断压得更短一点：</p>
+<p>当 Agent 能力逐渐成为标配，产品真正稀缺的是接近真实任务现场的能力。</p>
+<p>看一个产品，我会先问三件事。</p>
+<p>第一，它靠什么被相信？<br>
+有没有可信来源、机构身份、更新机制、引用依据和责任边界。</p>
+<p>第二，事情能在哪里继续发生？<br>
+问答之后，能不能接到预约、提交、授权、文件、会议、任务、人工服务或系统动作。</p>
+<p>第三，完成之后留下了什么？<br>
+有没有留下可复用的材料、偏好、流程、任务历史、行为记录和反馈数据。</p>
+<p>这三个问题都没有答案，Agent 就很容易停在功能展示。它可能好用，也可能短期惊艳，但壁垒会薄。</p>
+<p>这三个问题能接起来，Agent 才更像一种新的服务基础设施。它让机构更容易把可信供给交给 AI，让用户更容易把确定要做的事情继续推进，也让平台已有的内容、关系、服务和执行环境重新长成一条能持续学习的任务链。</p>
+<p>所以我现在不太会因为一个产品“也有 Agent”而兴奋。</p>
+<p>真正值得看的，是它到底接到了什么真实资源，又能不能从一次次任务里，长出别人拿不走的现场。</p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+回到顶部
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2026 | JAMES </div> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>

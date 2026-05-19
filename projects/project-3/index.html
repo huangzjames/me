@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/projects/project-3/"><!-- Primary Meta Tags --><title>README：Career Coach | JAMES</title><meta name="title" content="README：Career Coach | JAMES"><meta name="description" content="Career Coach 是一个围绕长期求职准备搭建的 Agent 协作系统原型"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/projects/project-3/"><meta property="og:title" content="README：Career Coach | JAMES"><meta property="og:description" content="Career Coach 是一个围绕长期求职准备搭建的 Agent 协作系统原型"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/projects/project-3/"><meta property="twitter:title" content="README：Career Coach | JAMES"><meta property="twitter:description" content="Career Coach 是一个围绕长期求职准备搭建的 Agent 协作系统原型"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.ByOTl-8k.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> JAMES </div>  </a> <nav class="flex gap-1"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+项目
+ </a> <span> / </span> <a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+文章
+ </a> <span> / </span> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+经历
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+返回
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-05-19T00:00:00.000Z"> May 19, 2026 </time> </div>
+&bull;
+<div class="font-base text-sm"> 2 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> README：Career Coach </div>  </div> <article class="animate"> <p>Career Coach 是一个围绕长期求职准备搭建的 Agent 协作系统原型。它基于本地 Markdown 文件和 coding agent（Claude Code、Codex 等）工作流运行，处理一类具体问题：当一项任务持续数周到数月、涉及多类材料和多轮讨论时，Agent 如何稳定地接续状态、组织上下文、校准目标，并把每一轮的判断沉淀成下一步可以使用的结构。</p>
+<p>虽然项目本身用于求职准备，要解决的是更普遍的一类任务——高上下文、长周期、需要多轮推进，且每一轮都依赖之前的积累。这类任务在写作、研究、产品分析、长期项目管理中都常见。Career Coach 是其中一个具体形态的尝试，在个人场景跑了几个月，结构在使用中逐渐稳定下来。</p>
+<h2 id="为什么普通-chatbot-难以接住长期任务">为什么普通 chatbot 难以接住长期任务</h2>
+<p>一个常见场景是：上周你在某个 chatbot 里和 AI 认真讨论过一个项目方案，今天想接着推进。</p>
+<p>打开新对话后，第一步往往不是提问，而是先解释背景：你是谁、之前做过什么、上次否掉了哪些方案、现在要继续聊哪一块。讲完背景，又想起旧对话里几段关键判断需要搬过来，于是去历史列表搜对话标题、滑滚轮上下翻动、复制粘贴，再手动加上”以下是背景、以下是上次结论、以下是这次任务”的分隔线。也可以让 AI 在旧对话末尾生成一份交接文档，但经常太精炼，要再人工核对细节。</p>
+<p>等这些都做完，任务还没真正开始，人自身的注意力已经被消耗了一轮。</p>
+<p>有的情况更难处理：一些过去讨论过的判断本来已经定下，在新的对话里被 AI 顺着当下的问题重新拐了方向；或者旧对话越聊越长，重要结论沉在中间，连自己都翻不出来。</p>
+<p>问题落在长任务里的”接续”上：状态不清楚、上下文不分类、关键判断难以复用。</p>
+<h2 id="系统如何组织长期协作">系统如何组织长期协作</h2>
+<p>可以把 Career Coach 想成一个”长期任务的工作台 + 状态面”。</p>
+<p>每次新会话开始时，Agent 先看一眼状态面（现在停在哪里、下一步是什么），再有针对性地翻工作台上对应的几份材料（这次要用什么），讨论结束后把真正影响下一步的结论写回对应位置。日常档案、历史讨论、当前判断、外部资料各自归位，每一类不和别的混在一起。</p>
+<p>这套结构关心两件事：每次会话都能从一个清楚的当前状态出发；讨论完之后留下一些下次还能用的东西。如何让 Agent 记得更多东西——反而不是重点。</p>
+<p>实际运行中也观察到：用户已有的备忘录、侧边栏笔记 App、收藏夹相关的记录习惯，并不会因为有了这个系统就消失。临时灵感、半成型的想法仍然会先出现在那些更轻更便捷的工具里。一个更现实的产品化方向，是在”正式计划、临时想法、外部资料”之间建立连接，是原有工具和系统形成接力，而不是要求用户把所有信息都搬进这个系统。</p>
+<h2 id="核心模块">核心模块</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>career-coach-agent/</span></span>
+<span class="line"><span>├── COACH.md                 # 系统入口，定义协作规则</span></span>
+<span class="line"><span>├── coach_system/            # 启动、开场、运行、归档流程</span></span>
+<span class="line"><span>├── DASHBOARD.md             # 状态看板：当前阶段、最近进展、下一步</span></span>
+<span class="line"><span>├── profile.md               # 稳定档案：背景、经历、偏好、长期约束</span></span>
+<span class="line"><span>├── control_plane/</span></span>
+<span class="line"><span>│   ├── CURRENT_STRATEGY.md  # 当前阶段战略判断</span></span>
+<span class="line"><span>│   └── CURRENT_PLAN.md      # 当前计划和下一步行动</span></span>
+<span class="line"><span>├── session_log/             # 历史会话归档</span></span>
+<span class="line"><span>├── resources/               # 外部资料、草稿、调研、写作材料</span></span>
+<span class="line"><span>└── CHANGELOG.md             # 系统迭代记录</span></span></code></pre>
+<p><code>COACH.md</code> 是入口，定义协作规则；<code>coach_system/</code> 放具体的启动、开场、运行、归档流程文件。两者分开，是为了让”系统是什么”和”系统怎么跑”各自可读、可改。</p>
+<h3 id="状态看板">状态看板</h3>
+<p><code>DASHBOARD.md</code> 是新会话的入口。聊天式 Agent 的界面通常只有一个空白输入框，用户容易忘记上一轮做到哪里，也容易忘记系统能帮自己做哪些事。状态看板相当于一个轻量 UI：包含当前阶段、最近进展、下一步动作，让人和 Agent 都能在第一秒回到同一个位置。</p>
+<h3 id="上下文路由">上下文路由</h3>
+<p>这不是一种通用记忆架构，只是这个原型在实际使用中、从摩擦里逐渐归出来的四种上下文分类。每一类对应一个具体问题：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>上下文类型</th><th>主要内容</th><th>解决的问题</th></tr></thead><tbody><tr><td>稳定的背景信息</td><td>长期有效的个人经历、偏好、约束</td><td>每次新会话，用户不用重新解释自己</td></tr><tr><td>历史归档</td><td>过去的重要讨论和阶段性结论</td><td>旧讨论能留存下来，又不会反复跳出来干扰当前对话</td></tr><tr><td>当前判断</td><td>本阶段仍然有效的策略和计划</td><td>默认会进入每一轮的讨论，避免 Agent 忘记用户的核心目标</td></tr><tr><td>外部资料</td><td>行业文章、产品笔记、用户反馈、写作素材等</td><td>按本轮任务有选择地接入，不污染主上下文</td></tr></tbody></table>
+<p>每次会话需要的，不是”全部上下文”，而是”这一轮要用的那部分”。</p>
+<h3 id="阶段性计划">阶段性计划</h3>
+<p><code>CURRENT_PLAN.md</code> 和 <code>CURRENT_STRATEGY.md</code> 保留<strong>当前仍然有效</strong>的判断。它和 session log （历史归档）的差别在于：session log  （历史归档）记录的是过程，内容可以允许发散、可以是流水账；而 plan 和 strategy 记录的则是结论，留存住结论，Agent 才能知道什么是该过滤掉的噪音。Agent 接手任务时优先读这两份文件，避免每次都从历史流水账里反推现在该做什么。</p>
+<h3 id="外部资料接入">外部资料接入</h3>
+<p>外部资料进入系统时通常先做一次人工筛选，再交给 Agent 阅读和复述。这一步的目的是让新信息落到下一步行动上。一份行业文章、一段用户反馈、一次竞品体验，如果只是被保存下来，仍然停留在素材层；改变了下一步行动、产品判断或对外交付物的，才真正进入了系统。</p>
+<h3 id="目标校准">目标校准</h3>
+<p>开放式写作、定位讨论、策略调整这类任务容易出错。Agent 会延续旧共识、输出看似完整但不契合真实读者需求的内容、顺着临时想法发散、把内部讨论语言直接当成对外产出。</p>
+<p>所以在这类任务前，会先做一轮校准：这次产物给谁看、要解决什么问题、哪些内容不能写、是否需要参考外部样本和例子。校准的作用是，用现实约束把 Agent 从已有的上下文的自我循环里拉出来。</p>
+<h3 id="写回机制">写回机制</h3>
+<p>讨论结束后，只把真正影响后续行动的结论写回 plan、strategy 或 session log；一次性的解释和发散内容留在对话里就好。这一步容易被忽略，但它决定了下一次新开对话窗时，Agent 拿到的是”已经整理过的材料”，还是”一摞没整理的对话”。</p>
+<h2 id="人和-agent-的分工">人和 Agent 的分工</h2>
+<p>Agent 承担执行性脑力工作：阅读资料、提取关键信息、比较多个材料或方案、整理上下文、改写草稿、提出结构和下一步建议；它也承担一部分辅助判断，比如指出冲突、提出风险、列出方案的取舍。</p>
+<p>人承担方向性判断：哪些资料值得进入系统、哪个方向更值得推进、某个表述是否符合当前定位、Agent 的建议是否采纳、哪些结论应该写回。</p>
+<p>整体上，Agent 的目标是把材料、路径和选项整理到一个<strong>更容易判断</strong>的状态，这些判断最终仍然需要人来审阅、由人来做决定。系统的最终输出，取决于使用它的那个人的判断力。</p>
+<h2 id="可迁移的产品方向">可迁移的产品方向</h2>
+<p>Career Coach 来自一个具体任务，其中几块结构在其他高上下文、长周期场景里也会反复遇到：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>结构组块</th><th>解决的问题</th><th>可能适合的场景</th></tr></thead><tbody><tr><td>状态接续</td><td>用户下一次回到任务时，怎么在很短时间内记起”上次做到哪里了”</td><td>个人 AI 工作台、办公助手、研究助手</td></tr><tr><td>上下文路由</td><td>Agent 怎么区分长期背景、历史材料、当前判断、外部资料，避免一锅炖、上下文污染</td><td>知识库类产品、AI 工作台、长期写作 / 研究助手</td></tr><tr><td>资料接入</td><td>新读到的内容怎么影响下一步行动，而不是只被收藏</td><td>个人知识服务、内容工作流、竞品 / 行业研究</td></tr><tr><td>目标校准</td><td>在开放式任务前，怎么先明确读者、目标、约束、可接受的样例</td><td>写作 Agent、vibe coding、设计 / 方案协作</td></tr><tr><td>写回机制</td><td>怎么让每次讨论都留下下次直接能用的状态文档</td><td>长期协作 Agent、企业内部助手、项目管理</td></tr><tr><td>与用户已有工具共存</td><td>怎么和备忘录、文档、IM 软件、浏览器收藏夹等真实工作习惯连接</td><td>想成为工作入口的 Agent 产品</td></tr></tbody></table>
+<p>这些结构组块指向一个底层问题：当 Agent 试图成为长期任务的协作层时，它需要能恢复状态、筛选上下文、推动下一步、把关键结论留住。这件事在不同形态的产品里会有不同的实现路径。</p>
+<h2 id="进一步的产品化方向">进一步的产品化方向</h2>
+<p>在原型之后，比文件结构本身更值得沉淀下来的，是几个显式化的环节：状态接续、上下文路由、目标校准、写回。这些环节指向了进一步的产品化方向——重点不应只是让系统记住更多内容。更自然的产品化方向，会在于这几个能力：</p>
+<ul>
+<li><strong>更低成本的状态恢复</strong>：用户回来时立刻知道任务停在哪里。</li>
+<li><strong>更清晰的上下文选择</strong>：帮用户决定当前任务应该激活哪些材料。</li>
+<li><strong>更自然的外部资料接入</strong>：让文章、反馈、竞品体验进入后续行动，而不只是停留在收藏夹。</li>
+<li><strong>更可靠的目标校准</strong>：在开放式生成前，先明确读者、约束和验收标准。</li>
+<li><strong>更轻的写回方式</strong>：让关键结论自然沉淀到下一轮任务里，而不是要求用户每次手动整理完整归档。</li>
+</ul>
+<p>原型规模不大，但运行过程中，长期 Agent 协作里的几个具体问题已然浮现：状态、上下文、目标、判断、写回，以及如何和用户原有工作习惯共存。若面向更多用户或更具体的业务场景，这些问题也值得继续被拆开验证。</p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+回到顶部
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2026 | JAMES </div> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>

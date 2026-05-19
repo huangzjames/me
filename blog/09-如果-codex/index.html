@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.C38fXH4l.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.LgqL8muc.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.DnxXpLNu.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.B-3RcLOQ.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/blog/09-%E5%A6%82%E6%9E%9C-codex/"><!-- Primary Meta Tags --><title>如果 Codex 要走出代码项目 | JAMES</title><meta name="title" content="如果 Codex 要走出代码项目 | JAMES"><meta name="description" content="任务不是被用户输入出来的，很多时候是从材料里长出来的"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/blog/09-%E5%A6%82%E6%9E%9C-codex/"><meta property="og:title" content="如果 Codex 要走出代码项目 | JAMES"><meta property="og:description" content="任务不是被用户输入出来的，很多时候是从材料里长出来的"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/blog/09-%E5%A6%82%E6%9E%9C-codex/"><meta property="twitter:title" content="如果 Codex 要走出代码项目 | JAMES"><meta property="twitter:description" content="任务不是被用户输入出来的，很多时候是从材料里长出来的"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "light");
+      toggleTheme(false);
+    });
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "dark");
+      toggleTheme(true);
+    });
+
+    const systemThemeButton = document.getElementById("system-theme-button");
+    systemThemeButton?.addEventListener("click", () => {
+      localStorage.setItem("theme", "system");
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.ByOTl-8k.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 justify-between"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> JAMES </div>  </a> <nav class="flex gap-1"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+项目
+ </a> <span> / </span> <a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+文章
+ </a> <span> / </span> <a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"> 
+经历
+ </a> </nav> </div>  </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/blog" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+返回
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-04-24T16:00:00.000Z"> Apr 25, 2026 </time> </div>
+&bull;
+<div class="font-base text-sm"> 1 min read </div> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> 如果 Codex 要走出代码项目 </div> </div> <article class="animate"> <p>我越来越觉得，coding agent 要走出代码项目，首先要承认一件事：<strong>任务不是被用户输入出来的，很多时候是从材料里长出来的。</strong></p>
+<p>现在的 Codex 很擅长处理已经成形的任务。你给它一个仓库、一组文件、一个明确目标，它能读、能改、能写回。但很多日常知识工作不是这样开始的。它经常从一篇读到一半的文章、一段和 ChatGPT 的闲聊、一个临时冒出来的疑问、几份还没连接起来的材料开始。它们一开始不是任务，只是一些可能会长成任务的东西。更具体一点说，很多任务最早发生在内容消费里：读公众号、看新闻、刷到一段视频、看到一份展商名单，先是有点好奇，接着想问几句，再往后才可能变成笔记、报告、复习题、行业观察或工作行动。</p>
+<p>作为一个把 coding agent 长期用进求职材料、产品研究、长文阅读和写作修改的人，我最希望它下一步补的，不只是更强的执行能力，而是三层更靠前、更靠后的产品结构。我暂时把它们叫做：<strong>一个想法怎么变成任务、材料为什么和我有关、任务主线有没有被看见</strong>。</p>
+<p><strong>第一层是：一个想法怎么变成任务。</strong></p>
+<p>我现在不会每次有想法都打开 Codex。很多时候，我会先在 ChatGPT 里聊，因为它轻，适合发散，也不污染工作区。聊偏了、聊坏了，沉底就沉底。只有当一段对话真的聊出了火花，我才会把它留下来，再放进后续工作流。</p>
+<p>这背后有一个很真实的用户心智：想法一开始需要自由空间，不需要项目管理。太早进入工作区，反而会提高心理负担。就像微信里的一段聊天，一开始只是随口说几句，但聊着聊着，可能就会变成一个待办、一场会议、一个要继续跟进的问题。聊天和任务之间，本来就有一段模糊地带。内容消费也是这样，用户一开始只是看见了什么，感兴趣了，没看懂，想追问一下；任务是后来才慢慢长出来的。</p>
+<p>比如我读到一篇中美关系或者国际贸易相关的文章，一开始可能只是没看懂，想问几句。聊着聊着，我发现它能和我之前上过的金融课、国际贸易知识点对上。这时候，这段对话就不再只是闲聊。它可能会变成一条笔记、一个现实案例、几道复习题，甚至影响我之后理解同类新闻的方式。</p>
+<p>所以我希望未来的 coding agent，不只是等用户输入一个明确任务，也能承接那些还没成形的想法。更理想的状态是，一段轻聊、一篇文章、一段外部对话，可以先进入一个“待处理材料区”，不急着归档，也不急着执行，等它和其他材料发生关系，再变成某个任务的上下文。</p>
+<p><strong>第二层是：材料为什么和我有关。</strong></p>
+<p>我现在会把一些材料路径放进一个侧边的临时笔记队列里，并且给每份材料写一句说明：它大概讲什么，可能有什么价值，我希望之后让 AI 从什么角度读它。表面上，这是在给 AI 写提示；实际上，这是我自己在组织问题。很多时候，我是在写这些说明的时候才发现，几份材料真正指向的是同一个更大的问题。</p>
+<p>这让我意识到，AI 不只需要材料，还需要知道用户为什么在意这些材料。同一篇文章，对不同人意义完全不同。它可能是用来校准一个判断，可能是用来修改一段文案，可能是用来反驳自己之前的想法，也可能只是暂时保留，等待和别的材料一起看。如果产品只是把材料交给 AI，然后生成一份总结，很容易变成一份泛泛的摘要。</p>
+<p>这里更好的产品形态，不是再给用户一个空白输入框，让用户自己写一大段提示词，而是系统先做一点推测，再让用户轻确认。比如：你是不是想用这些材料整理观点？是不是想修改某个文档？是不是想比较几个方向？是不是只是先存起来，之后再处理？用户只需要点选、改写、补一句自己的关注点。类似飞书、钉钉里把一条消息转成待办时，产品不会要求你从零写一份项目说明，而是先保留原始语境，再让你补充截止时间、负责人、下一步要做什么。</p>
+<p>对 AI 来说，材料不是上下文的全部。用户为什么拿这些材料来问，才是上下文真正的入口。</p>
+<p><strong>第三层是：任务主线有没有被看见。</strong></p>
+<p>长对话里，最容易丢的不是信息，而是主线。用户一开始带着一个目的来，过程中又会不断补充新材料、新想法、新要求。Agent 也会不断回应、延展、修改、生成产物。聊到后面，信息越来越多，产物越来越多，但用户反而容易忘记：我一开始到底想解决什么？过程中又冒出了哪些新目标？哪些已经做完了，哪些还悬着？</p>
+<p>我现在经常会在一段长对话快结束时问 Agent：我们前面聊过些什么，话题怎么流转，有哪些值得留存的亮点？我问这个，不是想要一份完整聊天摘要，而是怕这次对话里真正有价值的东西没有被带走。很多时候，一轮任务里最重要的并不是最后生成的那份文档，而是中间某个判断、某个例子、某个还没展开但值得继续追的问题。</p>
+<p>现在很多 Agent 会告诉你它做了什么文件、调用了什么工具、生成了哪些产物。Codex 也会在某些时候做类似的总结。但我更想看到的是一个任务主线视图：当前主线是什么，最初目标是什么，过程中新增了哪些意图，哪些已经完成，哪些还没处理，哪些亮点值得归档，哪些需要下一步继续做。</p>
+<p>这不是多一个总结功能，而是让用户感知到 Agent 真的在理解任务。它不是只在一轮轮回应我，而是在持续捕捉“我到底想推进什么”。对长任务来说，这种方向感很重要。产物清单只能告诉我“做了什么”，任务主线视图才能告诉我“这些东西有没有服务于我真正想做的事”。</p>
+<p>这套东西不一定要很重。它可以是一个侧边浮窗，也可以是一个可折叠的任务面板。里面不用写长篇大论，只要能让我随时看一眼：我们现在在做什么，已经做了什么，刚刚新增了什么意图，还有什么没带走。用户也可以随手改它，告诉 Agent：这条不是重点，那条要保留，这个问题还没解决。</p>
+<p>顺着这个思路再看 WorkBuddy，我会更关注它怎么承接普通办公里的真实任务。微信入口、文档、本地执行环境这些东西，已经让 Agent 离日常工作近了一步。后面真正要打磨的，可能就是内容怎么进来、意图怎么表达、主线怎么不丢。</p>
+<p>也就是：一个想法怎么变成可用材料，用户的真实意图怎么被表达，Agent 怎么让用户看见自己没有丢掉主线。</p>
+<p>如果这些结构补上，Codex 对我来说就不只是一个“有明确任务时才打开的工具”。它会更像一个我看到一段信息、想弄懂它、想把它变成笔记、报告或下一步行动时，会自然回来的地方。</p>
+<p>在这种场景里，我真正想带走的也许不是整段回答，而是其中某个知识点、某个解释、某个以后还会用到的例子。我不想再手动复制到外部笔记软件里重新排版。更自然的动作可能是，我在对话里轻轻标一下：“刚刚那个关税相关的原理，帮我留一下。”Agent 应该能从上下文里知道我指的是哪一段，整理成一条可回看的材料，再让我决定放进哪一个主题、文档或知识库里。不是所有启发都要自动沉淀，但那些用户明确想带走的东西，不应该继续死在聊天记录里。</p>
+<p>又比如我在视频号里看到深圳有一个人工智能展，有展商名单，但我没时间去现场。我真正想要的不是让 AI 总结这条视频，而是让它顺着展商名单去公众号、官网、新闻稿里找一圈，看看这些公司最近在展示什么、行业里有什么新动向，再整理成一份可以发给同事或团队看的行业观察。这个任务从内容消费开始，最后可能变成一份文档、一段分享、一次讨论的材料。</p>
+<p>这时候，产品记录的就不只是“我问过什么”。它会知道什么内容触发了我的兴趣，我为什么继续追问，过程中新增了哪些任务意图，哪些解释被我采纳，哪些材料最后变成了笔记、题目、报告或分享材料。对 Agent 产品来说，真正值得看的指标，也不只是生成了多少次、调用了多少工具，而是有多少上下文被复用，多少中途产生的意图被捕捉，多少任务从内容消费走到了下一步行动。</p>
+<p>用户为什么会回来，也可以从这里理解。不是因为产品把人锁住了，而是因为这条链路在这里最顺。下次我再看到一篇难懂的文章、一个有意思的视频、一份值得跟进的名单，我会自然想到这里，因为这里已经留下了我的材料、我的笔记、我的理解方式和我上次走到的位置。换一个工具，意味着重新搬材料、重新解释意图、重新建立习惯。大多数人不会专门计算这件事的成本，但会本能地选择那个最省事、最接得上的地方。</p>
+<p>所以，coding agent 要走向更普通的日常工作，不只是把执行能力做强。它还要理解人从“看到一个东西”到“真正把它用起来”的全过程。人的任务往往不是凭空出现的，它是从一篇文章、一段视频、一次闲聊、几份还没连起来的材料里慢慢长出来的。真正难的不是再多完成一次指令，而是让那些原本会散掉的内容、想法和判断，变成用户下一次还能继续使用的工作资产。</p> </article>  </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+回到顶部
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2026 | JAMES </div> <div class="flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div>  </div> </footer> </body></html>
