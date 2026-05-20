@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.huangzijian.com.cn/sitemap-index.xml
+Sitemap: https://astro-nano-demo.vercel.app/sitemap-index.xml
