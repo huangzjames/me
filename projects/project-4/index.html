@@ -1,15 +1,28 @@
-<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta id="theme-color-meta" name="theme-color" content="#f4f4f5"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads（先只预载 UI 字体） --><link rel="preload" href="/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/projects/project-4/"><!-- Primary Meta Tags --><title>Career Coach 复盘：当方法论掉进真实场景 | JAMES</title><meta name="title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta name="description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="og:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="og:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="twitter:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="twitter:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DcSP9LZ1.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
-  function init() {
-    preloadTheme();
+<!DOCTYPE html><html lang="en" data-astro-transition-scope="astro-afzj4hfx-1"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta id="theme-color-meta" name="theme-color" content="#f4f4f5"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads（先只预载 UI 字体） --><link rel="preload" href="/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/projects/project-4/"><!-- Primary Meta Tags --><title>Career Coach 复盘：当方法论掉进真实场景 | JAMES</title><meta name="title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta name="description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="og:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="og:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/projects/project-4/"><meta property="twitter:title" content="Career Coach 复盘：当方法论掉进真实场景 | JAMES"><meta property="twitter:description" content="读到一个方法和把它跑在自己的场景里，中间隔着很大一段距离"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DcSP9LZ1.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init(fromSwap) {
+    if (!fromSwap) {
+      preloadTheme();
+    }
     onScroll();
-    animate();
+    animate(fromSwap);
     preventDoubleTapZoom();
+    bindUiHandlers();
+  }
+
+  function bindUiHandlers() {
+    bindScrollHandler();
 
     const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+    if (backToTop && !backToTop.dataset.bound) {
+      backToTop.dataset.bound = "1";
+      backToTop.addEventListener("click", (event) => scrollToTop(event));
+    }
 
     const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
+    if (backToPrev && !backToPrev.dataset.bound) {
+      backToPrev.dataset.bound = "1";
+      backToPrev.addEventListener("click", () => window.history.back());
+    }
 
     const lightThemeButton = document.getElementById("light-theme-button");
     if (lightThemeButton && !lightThemeButton.dataset.bound) {
@@ -38,13 +51,18 @@
       });
     }
 
-    /*
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    });
-    */
+    bindSystemThemeListener();
+  }
+
+  function bindScrollHandler() {
+    if (document.documentElement.dataset.scrollHandlerBound) return;
+    document.documentElement.dataset.scrollHandlerBound = "1";
+    document.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function bindSystemThemeListener() {
+    if (document.documentElement.dataset.systemThemeBound) return;
+    document.documentElement.dataset.systemThemeBound = "1";
 
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
@@ -53,12 +71,15 @@
         }
       }
     );
-
-    document.addEventListener("scroll", onScroll);
   }
 
-  function animate() {
-    const animateElements = document.querySelectorAll(".animate");
+  function animate(fromSwap) {
+    const animateElements = document.querySelectorAll(".animate:not(.show)");
+
+    if (fromSwap) {
+      animateElements.forEach((element) => element.classList.add("show"));
+      return;
+    }
 
     animateElements.forEach((element, index) => {
       setTimeout(() => {
@@ -235,6 +256,12 @@ function toggleTheme(dark) {
     }
   });
 
+  document.addEventListener("astro:after-swap", () => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    init(true);
+  });
+
   function preloadTheme() {
     const userTheme = localStorage.theme;
 
@@ -245,10 +272,11 @@ function toggleTheme(dark) {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
+  document.addEventListener("DOMContentLoaded", () => init(false));
   preloadTheme();
-</script><link rel="stylesheet" href="/_astro/_slug_.B-6Rqots.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 items-center justify-between"> <div class="site-brand inline-flex items-center"> <span id="site-brand-link" class="site-brand-link"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <span id="site-brand-name" class="site-brand-name">JAMES</span>  </a> </span> <button type="button" id="theme-led-toggle" class="site-brand-led" aria-label="切换浅色/深色模式"></button> </div> <nav class="site-nav flex flex-wrap items-center justify-end gap-x-1 gap-y-0.5 min-w-0 max-w-full"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link nav-link--active" data-nav="projects" aria-current="page">  <span class="nav-link__label">项目</span>  </a> <span>/</span><a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="blog">  <span class="nav-link__label">文章</span>  </a> <span>/</span><a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="work">  <span class="nav-link__label">经历</span>  </a> <span>/</span><a href="/go/notes" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="notes" id="notes-link" data-astro-reload="true">  <span class="nav-link__label">笔记</span>  </a>  </nav> </div>  </div> </header> <script type="module" src="/_astro/Header.astro_astro_type_script_index_0_lang.mYqR-5gN.js"></script> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+</script><link rel="stylesheet" href="/_astro/_slug_.DrZ5Rauv.css"><style>[data-astro-transition-scope="astro-afzj4hfx-1"] { view-transition-name: astro-afzj4hfx-1; }@layer astro { ::view-transition-old(astro-afzj4hfx-1) { animation: none; opacity: 0; mix-blend-mode: normal; }::view-transition-new(astro-afzj4hfx-1) { animation: none; mix-blend-mode: normal; }::view-transition-group(astro-afzj4hfx-1) { animation: none } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-afzj4hfx-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-afzj4hfx-1"] { animation: none; mix-blend-mode: normal; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-afzj4hfx-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-afzj4hfx-1"] { animation: none; mix-blend-mode: normal; }</style></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 items-center justify-between"> <div class="site-brand inline-flex items-center"> <span id="site-brand-link" class="site-brand-link"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <span id="site-brand-name" class="site-brand-name">JAMES</span>  </a> </span> <button type="button" id="theme-led-toggle" class="site-brand-led" aria-label="切换浅色/深色模式"></button> </div> <nav class="site-nav flex flex-wrap items-center justify-end gap-x-1 gap-y-0.5 min-w-0 max-w-full"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link nav-link--active" data-nav="projects" aria-current="page">  <span class="nav-link__label">项目</span>  </a> <span>/</span><a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="blog">  <span class="nav-link__label">文章</span>  </a> <span>/</span><a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="work">  <span class="nav-link__label">经历</span>  </a> <span>/</span><a href="/go/notes" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="notes" id="notes-link" data-astro-reload="true">  <span class="nav-link__label">笔记</span>  </a>  </nav> </div>  </div> </header> <script type="module" src="/_astro/Header.astro_astro_type_script_index_0_lang.mYqR-5gN.js"></script> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/projects" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
 返回
  </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> <time datetime="2026-05-19T00:00:00.000Z"> May 19, 2026 </time> </div>
 &bull;

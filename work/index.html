@@ -1,15 +1,28 @@
-<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta id="theme-color-meta" name="theme-color" content="#f4f4f5"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads（先只预载 UI 字体） --><link rel="preload" href="/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/work/"><!-- Primary Meta Tags --><title>经历 | JAMES</title><meta name="title" content="经历 | JAMES"><meta name="description" content="个人经历"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/work/"><meta property="og:title" content="经历 | JAMES"><meta property="og:description" content="个人经历"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/work/"><meta property="twitter:title" content="经历 | JAMES"><meta property="twitter:description" content="个人经历"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DcSP9LZ1.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
-  function init() {
-    preloadTheme();
+<!DOCTYPE html><html lang="en" data-astro-transition-scope="astro-afzj4hfx-1"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta id="theme-color-meta" name="theme-color" content="#f4f4f5"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads（先只预载 UI 字体） --><link rel="preload" href="/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/work/"><!-- Primary Meta Tags --><title>经历 | JAMES</title><meta name="title" content="经历 | JAMES"><meta name="description" content="个人经历"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/work/"><meta property="og:title" content="经历 | JAMES"><meta property="og:description" content="个人经历"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/work/"><meta property="twitter:title" content="经历 | JAMES"><meta property="twitter:description" content="个人经历"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DcSP9LZ1.js"></script><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init(fromSwap) {
+    if (!fromSwap) {
+      preloadTheme();
+    }
     onScroll();
-    animate();
+    animate(fromSwap);
     preventDoubleTapZoom();
+    bindUiHandlers();
+  }
+
+  function bindUiHandlers() {
+    bindScrollHandler();
 
     const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+    if (backToTop && !backToTop.dataset.bound) {
+      backToTop.dataset.bound = "1";
+      backToTop.addEventListener("click", (event) => scrollToTop(event));
+    }
 
     const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
+    if (backToPrev && !backToPrev.dataset.bound) {
+      backToPrev.dataset.bound = "1";
+      backToPrev.addEventListener("click", () => window.history.back());
+    }
 
     const lightThemeButton = document.getElementById("light-theme-button");
     if (lightThemeButton && !lightThemeButton.dataset.bound) {
@@ -38,13 +51,18 @@
       });
     }
 
-    /*
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    });
-    */
+    bindSystemThemeListener();
+  }
+
+  function bindScrollHandler() {
+    if (document.documentElement.dataset.scrollHandlerBound) return;
+    document.documentElement.dataset.scrollHandlerBound = "1";
+    document.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function bindSystemThemeListener() {
+    if (document.documentElement.dataset.systemThemeBound) return;
+    document.documentElement.dataset.systemThemeBound = "1";
 
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
@@ -53,12 +71,15 @@
         }
       }
     );
-
-    document.addEventListener("scroll", onScroll);
   }
 
-  function animate() {
-    const animateElements = document.querySelectorAll(".animate");
+  function animate(fromSwap) {
+    const animateElements = document.querySelectorAll(".animate:not(.show)");
+
+    if (fromSwap) {
+      animateElements.forEach((element) => element.classList.add("show"));
+      return;
+    }
 
     animateElements.forEach((element, index) => {
       setTimeout(() => {
@@ -235,6 +256,12 @@ function toggleTheme(dark) {
     }
   });
 
+  document.addEventListener("astro:after-swap", () => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    init(true);
+  });
+
   function preloadTheme() {
     const userTheme = localStorage.theme;
 
@@ -245,10 +272,11 @@ function toggleTheme(dark) {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => init());
-  document.addEventListener("astro:after-swap", () => init());
+  document.addEventListener("DOMContentLoaded", () => init(false));
   preloadTheme();
-</script><link rel="stylesheet" href="/_astro/_slug_.B-6Rqots.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 items-center justify-between"> <div class="site-brand inline-flex items-center"> <span id="site-brand-link" class="site-brand-link"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <span id="site-brand-name" class="site-brand-name">JAMES</span>  </a> </span> <button type="button" id="theme-led-toggle" class="site-brand-led" aria-label="切换浅色/深色模式"></button> </div> <nav class="site-nav flex flex-wrap items-center justify-end gap-x-1 gap-y-0.5 min-w-0 max-w-full"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="projects">  <span class="nav-link__label">项目</span>  </a> <span>/</span><a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="blog">  <span class="nav-link__label">文章</span>  </a> <span>/</span><a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link nav-link--active" data-nav="work" aria-current="page">  <span class="nav-link__label">经历</span>  </a> <span>/</span><a href="/go/notes" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="notes" id="notes-link" data-astro-reload="true">  <span class="nav-link__label">笔记</span>  </a>  </nav> </div>  </div> </header> <script type="module" src="/_astro/Header.astro_astro_type_script_index_0_lang.mYqR-5gN.js"></script> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="space-y-10"> <div class="animate font-semibold text-black dark:text-white">
+</script><link rel="stylesheet" href="/_astro/_slug_.DrZ5Rauv.css"><style>[data-astro-transition-scope="astro-afzj4hfx-1"] { view-transition-name: astro-afzj4hfx-1; }@layer astro { ::view-transition-old(astro-afzj4hfx-1) { animation: none; opacity: 0; mix-blend-mode: normal; }::view-transition-new(astro-afzj4hfx-1) { animation: none; mix-blend-mode: normal; }::view-transition-group(astro-afzj4hfx-1) { animation: none } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-afzj4hfx-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-afzj4hfx-1"] { animation: none; mix-blend-mode: normal; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-afzj4hfx-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-afzj4hfx-1"] { animation: none; mix-blend-mode: normal; }</style></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 items-center justify-between"> <div class="site-brand inline-flex items-center"> <span id="site-brand-link" class="site-brand-link"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <span id="site-brand-name" class="site-brand-name">JAMES</span>  </a> </span> <button type="button" id="theme-led-toggle" class="site-brand-led" aria-label="切换浅色/深色模式"></button> </div> <nav class="site-nav flex flex-wrap items-center justify-end gap-x-1 gap-y-0.5 min-w-0 max-w-full"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="projects">  <span class="nav-link__label">项目</span>  </a> <span>/</span><a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="blog">  <span class="nav-link__label">文章</span>  </a> <span>/</span><a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link nav-link--active" data-nav="work" aria-current="page">  <span class="nav-link__label">经历</span>  </a> <span>/</span><a href="/go/notes" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="notes" id="notes-link" data-astro-reload="true">  <span class="nav-link__label">笔记</span>  </a>  </nav> </div>  </div> </header> <script type="module" src="/_astro/Header.astro_astro_type_script_index_0_lang.mYqR-5gN.js"></script> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="space-y-10"> <div class="animate font-semibold text-black dark:text-white">
 个人经历
 </div> <ul class="flex flex-col space-y-4"> <li class="animate"> <div class="text-sm opacity-75"> 2024.08 - 至今 </div> <div class="font-semibold text-black dark:text-white"> Gen Z 科技青年智库 </div> <div class="text-sm opacity-75"> 发起人、主讲人 </div> <article class="prose-emerald-body"> <p>联合发起面向消费电子从业者的行业交流平台，累计组织 11 场专题分享，覆盖 44+ 人次。本人主讲 AI 提效、智能设备与产品体验相关主题，把个人实践与行业观察整理为可交流的专题，持续沉淀对技术趋势、产品方法与用户需求的理解。</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> 2023.07 - 2025.01 </div> <div class="font-semibold text-black dark:text-white"> 新加坡国立大学 (NUS) </div> <div class="text-sm opacity-75"> 技术与创新管理 硕士 </div> <article class="prose-emerald-body"> <p>2023—2025 年于 NUS 攻读硕士，期间逐步把在消费电子中积累的产品判断，转向 AI 产品与长期协作系统，毕业后以个人项目延续实践。</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> 2021.12 - 2022.10 </div> <div class="font-semibold text-black dark:text-white"> 深圳倍轻松科技股份有限公司 </div> <div class="text-sm opacity-75"> 智能硬件产品经理 </div> <article class="prose-emerald-body"> <p>在倍轻松负责成熟产品的持续优化与版本延展，在现实约束下平衡产品体验、成本、稳定交付与质量问题闭环，让产品能够继续被市场接受。</p> </article> </li><li class="animate"> <div class="text-sm opacity-75"> 2017.09 - 2021.07 </div> <div class="font-semibold text-black dark:text-white"> 深圳大学 </div> <div class="text-sm opacity-75"> 工业设计 学士 </div> <article class="prose-emerald-body"> <p>绩点专业排名 1/40；校级优秀毕业生；“荔园之星”特等奖学金。围绕人机交互、产品策划与产品系统设计展开的课程，训练了我从真实使用场景、交互摩擦和长期用户体验出发理解产品问题的习惯。</p> </article> </li> </ul> <!-- 
       <ul class="animate flex flex-col gap-4">
