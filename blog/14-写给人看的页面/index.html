@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta id="theme-color-meta" name="theme-color" content="#f4f4f5"><link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)"><link rel="icon" type="image/x-icon" href="/favicon-light.svg"><meta name="generator" content="Astro v5.18.1"><!-- Font preloads（先只预载 UI 字体） --><link rel="preload" href="/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://astro-nano-demo.vercel.app/blog/14-%E5%86%99%E7%BB%99%E4%BA%BA%E7%9C%8B%E7%9A%84%E9%A1%B5%E9%9D%A2/"><!-- Primary Meta Tags --><title>写给人看的页面：一篇样式完整的备忘 | JAMES</title><meta name="title" content="写给人看的页面：一篇样式完整的备忘 | JAMES"><meta name="description" content="把标题、段落、表格、代码和配图自然写进同一篇文章里，用来检查博客详情页的排版效果。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://astro-nano-demo.vercel.app/blog/14-%E5%86%99%E7%BB%99%E4%BA%BA%E7%9C%8B%E7%9A%84%E9%A1%B5%E9%9D%A2/"><meta property="og:title" content="写给人看的页面：一篇样式完整的备忘 | JAMES"><meta property="og:description" content="把标题、段落、表格、代码和配图自然写进同一篇文章里，用来检查博客详情页的排版效果。"><meta property="og:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://astro-nano-demo.vercel.app/blog/14-%E5%86%99%E7%BB%99%E4%BA%BA%E7%9C%8B%E7%9A%84%E9%A1%B5%E9%9D%A2/"><meta property="twitter:title" content="写给人看的页面：一篇样式完整的备忘 | JAMES"><meta property="twitter:description" content="把标题、段落、表格、代码和配图自然写进同一篇文章里，用来检查博客详情页的排版效果。"><meta property="twitter:image" content="https://astro-nano-demo.vercel.app/nano.png"><!-- RSS Link --><link rel="alternate" type="application/rss+xml" title="JAMES" href="https://astro-nano-demo.vercel.app/rss.xml"><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+    preventDoubleTapZoom();
+    bindUiHandlers();
+  }
+
+  function bindUiHandlers() {
+    bindScrollHandler();
+
+    const backToTop = document.getElementById("back-to-top");
+    if (backToTop && !backToTop.dataset.bound) {
+      backToTop.dataset.bound = "1";
+      backToTop.addEventListener("click", (event) => scrollToTop(event));
+    }
+
+    const backToPrev = document.getElementById("back-to-prev");
+    if (backToPrev && !backToPrev.dataset.bound) {
+      backToPrev.dataset.bound = "1";
+      backToPrev.addEventListener("click", () => window.history.back());
+    }
+
+    const lightThemeButton = document.getElementById("light-theme-button");
+    if (lightThemeButton && !lightThemeButton.dataset.bound) {
+      lightThemeButton.dataset.bound = "1";
+      lightThemeButton.addEventListener("click", () => {
+        if (!document.documentElement.classList.contains("dark")) return;
+        toggleThemeWithCrossfade(false);
+      });
+    }
+
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    if (darkThemeButton && !darkThemeButton.dataset.bound) {
+      darkThemeButton.dataset.bound = "1";
+      darkThemeButton.addEventListener("click", () => {
+        if (document.documentElement.classList.contains("dark")) return;
+        toggleThemeWithCrossfade(true);
+      });
+    }
+
+    const themeLedToggle = document.getElementById("theme-led-toggle");
+    if (themeLedToggle && !themeLedToggle.dataset.bound) {
+      themeLedToggle.dataset.bound = "1";
+      themeLedToggle.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.contains("dark");
+        toggleThemeWithCrossfade(!isDark);
+      });
+    }
+
+    bindSystemThemeListener();
+  }
+
+  function bindScrollHandler() {
+    if (document.documentElement.dataset.scrollHandlerBound) return;
+    document.documentElement.dataset.scrollHandlerBound = "1";
+    document.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function bindSystemThemeListener() {
+    if (document.documentElement.dataset.systemThemeBound) return;
+    document.documentElement.dataset.systemThemeBound = "1";
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme === "system" || !localStorage.theme) {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate:not(.show)");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function preventDoubleTapZoom() {
+    if (document.documentElement.dataset.doubleTapGuardBound) return;
+    document.documentElement.dataset.doubleTapGuardBound = "1";
+
+    let lastTouchEnd = 0;
+    document.addEventListener(
+      "touchend",
+      (event) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      },
+      { passive: false }
+    );
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function setThemeColor(dark) {
+    const meta = document.getElementById("theme-color-meta");
+    if (meta) {
+      meta.setAttribute("content", dark ? "#1c1917" : "#f4f4f5");
+    }
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+    setThemeColor(dark);
+  }
+
+  let themeTransitionBusy = false;
+
+  const THEME_MORPH_TIMING = {
+    duration: 520,
+    swapAt: 0.7,
+    fadeOut: 200,
+  };
+
+  function cleanupThemeMorph() {
+    const overlay = document.getElementById("theme-transition-overlay");
+    if (overlay) {
+      overlay.classList.remove("is-morphing", "is-fading-out", "to-dark", "to-light");
+    }
+    themeTransitionBusy = false;
+  }
+
+  function toggleThemeWithCrossfade(nextDark) {
+    if (themeTransitionBusy) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      localStorage.setItem("theme", nextDark ? "dark" : "light");
+      toggleTheme(nextDark);
+      return;
+    }
+
+    const overlay = document.getElementById("theme-transition-overlay");
+    if (!overlay) {
+      localStorage.setItem("theme", nextDark ? "dark" : "light");
+      toggleTheme(nextDark);
+      return;
+    }
+
+    themeTransitionBusy = true;
+    localStorage.setItem("theme", nextDark ? "dark" : "light");
+
+    const { duration, swapAt, fadeOut } = THEME_MORPH_TIMING;
+    const swapDelay = Math.round(duration * swapAt);
+    let swapTimeout;
+    let morphFallback;
+    let fadeOutFallback;
+
+    const finish = () => {
+      clearTimeout(swapTimeout);
+      clearTimeout(morphFallback);
+      clearTimeout(fadeOutFallback);
+      cleanupThemeMorph();
+    };
+
+    const startFadeOut = () => {
+      overlay.classList.remove("is-morphing");
+      overlay.classList.add("is-fading-out");
+
+      const onFadeOutEnd = (event) => {
+        if (event.propertyName !== "opacity") return;
+        overlay.removeEventListener("transitionend", onFadeOutEnd);
+        finish();
+      };
+
+      overlay.addEventListener("transitionend", onFadeOutEnd);
+      fadeOutFallback = setTimeout(() => {
+        overlay.removeEventListener("transitionend", onFadeOutEnd);
+        finish();
+      }, fadeOut + 80);
+    };
+
+    const onMorphEnd = (event) => {
+      const name = event.animationName;
+      if (name !== "theme-morph-to-dark" && name !== "theme-morph-to-light") return;
+      overlay.removeEventListener("animationend", onMorphEnd);
+      clearTimeout(morphFallback);
+      startFadeOut();
+    };
+
+    overlay.classList.remove("is-morphing", "is-fading-out", "to-dark", "to-light");
+    overlay.classList.add(nextDark ? "to-dark" : "to-light");
+
+    swapTimeout = setTimeout(() => toggleTheme(nextDark), swapDelay);
+
+    overlay.addEventListener("animationend", onMorphEnd);
+    morphFallback = setTimeout(() => {
+      overlay.removeEventListener("animationend", onMorphEnd);
+      toggleTheme(nextDark);
+      startFadeOut();
+    }, duration + 100);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add("is-morphing");
+      });
+    });
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_slug_.CJaPY27X.css"></head> <body> <header> <div class="mx-auto max-w-screen-sm px-5">  <div class="flex flex-wrap gap-y-2 items-center justify-between"> <div class="site-brand inline-flex items-center"> <span id="site-brand-link" class="site-brand-link"> <a href="/" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out">  <span id="site-brand-name" class="site-brand-name">JAMES</span>  </a> </span> <button type="button" id="theme-led-toggle" class="site-brand-led" aria-label="切换浅色/深色模式"></button> </div> <nav class="site-nav flex flex-wrap items-center justify-end gap-x-1 gap-y-0.5 min-w-0 max-w-full"> <a href="/projects" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="projects">  <span class="nav-link__label">项目</span>  </a> <span>/</span><a href="/blog" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link nav-link--active" data-nav="blog" aria-current="page">  <span class="nav-link__label">文章</span>  </a> <span>/</span><a href="/work" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="work">  <span class="nav-link__label">经历</span>  </a> <span>/</span><a href="/go/notes" target="_self" class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out nav-link" data-nav="notes" id="notes-link">  <span class="nav-link__label">笔记</span>  </a>  </nav> </div>  </div> </header> <script type="module">const a=[{id:"projects",test:t=>t==="/projects"||t.startsWith("/projects/")},{id:"blog",test:t=>t==="/blog"||t.startsWith("/blog/")},{id:"work",test:t=>t==="/work"||t.startsWith("/work/")},{id:"notes",test:t=>t==="/go/notes"||t.startsWith("/go/notes/")}];function s(t){const e=t.replace(/\/$/,"")||"/";if(e==="/")return null;for(const{id:n,test:i}of a)if(i(e))return n;return null}function r(){const t=window.location.pathname.replace(/\/$/,"")||"/";return t==="/"||t===""}function c(){window.location.assign("/")}function d(t,e){const n=o=>{o.animationName==="site-brand-flip"&&(t.removeEventListener("animationend",n),clearTimeout(i),e())};t.addEventListener("animationend",n);const i=setTimeout(()=>{t.removeEventListener("animationend",n),e()},700)}function l(t){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const e=document.getElementById("site-brand-name");e&&(t.preventDefault(),!e.classList.contains("is-flipping")&&(e.classList.add("is-flipping"),d(e,()=>{e.classList.remove("is-flipping"),r()||c()})))}function u(){const t=document.querySelector("#site-brand-link a");!t||t.dataset.bound==="1"||(t.dataset.bound="1",t.addEventListener("click",l))}function f(){try{sessionStorage.removeItem("notes-was-redirected")}catch{}}function m(){const t=document.getElementById("notes-link");!t||t.dataset.notesBound==="1"||(t.dataset.notesBound="1",t.addEventListener("click",f))}function v(){const t=s(window.location.pathname);document.querySelectorAll("header nav .nav-link[data-nav]").forEach(e=>{const n=e.dataset.nav===t;e.classList.toggle("nav-link--active",n),n?e.setAttribute("aria-current","page"):e.removeAttribute("aria-current")})}u();m();v();</script> <main>  <div class="mx-auto max-w-screen-sm px-5">  <div class="animate"> <a href="/blog" class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm"> 
+返回
+ </div> </a> </div> <div class="space-y-1 my-10"> <div class="animate font-base text-sm"> <time datetime="2026-05-19T00:00:00.000Z"> 2026.05.19 </time> </div> <div class="animate text-2xl font-semibold text-black dark:text-white"> 写给人看的页面：一篇样式完整的备忘 </div> </div> <article class="animate prose-emerald-body"> <p>很多产品文档写得像说明书，很多个人文章又写得像日记。真正耐读的长文，往往介于两者之间：<strong>有结构，但不僵硬；有观点，但不喊口号；有细节，但不把读者淹没在格式里。</strong></p>
+<p>这篇文字不是为了教你 Markdown 语法，而是借一个真实话题——<strong>怎样把复杂想法写进网页</strong>——把博客详情页常见的视觉元素都走一遍。如果你正在检查文章页或项目页的渲染效果，可以直接从这里开始对照。</p>
+<hr>
+<h2 id="先定读者再定结构">先定读者，再定结构</h2>
+<p>我写文章时通常会先问三个问题：</p>
+<ol>
+<li><strong>读者是谁</strong> — 同事、客户，还是未来的自己？</li>
+<li><strong>他读完要带走什么</strong> — 一个判断、一张清单，还是一段可引用的表述？</li>
+<li><strong>他会在哪里打断</strong> — 手机、地铁、会议前五分钟？</li>
+</ol>
+<p>这三个问题听起来很「咨询腔」，但它们会直接影响排版选择。比如：</p>
+<ul>
+<li>需要快速扫读的人，会更依赖 <strong>小标题</strong> 和 <strong>表格</strong>；</li>
+<li>需要跟着做的人，会更依赖 <strong>有序清单</strong> 和 <strong>代码块</strong>；</li>
+<li>需要被说服的人，会更依赖 <strong>引用</strong> 和 <strong>强调框</strong>。</li>
+</ul>
+<p>下面这张示意图，是我动笔前最常见的工作台状态：屏幕里是空白文档，旁边只留一杯水和一点安静。📝</p>
+<figure>
+  <img src="./assets/writing-desk.svg" alt="晚间写作时的桌面示意：空白文档、水杯与简单桌面">
+  <figcaption>图 1：我习惯在动笔前先摆一杯水、关掉通知，再打开空白文档。</figcaption>
+</figure>
+<hr>
+<h2 id="标题层级让读者始终知道我在哪一层">标题层级：让读者始终知道「我在哪一层」</h2>
+<p>网页里的标题，不只是字号变化，而是 <strong>信息地图</strong>。</p>
+<h3 id="二级标题一个完整观点">二级标题：一个完整观点</h3>
+<p>二级标题应该能单独成立。比如这一节的观点是：<strong>标题层级要服务于理解，而不是装饰。</strong></p>
+<h3 id="三级标题一个可执行的子块">三级标题：一个可执行的子块</h3>
+<p>三级标题适合放方法、例子、反例。再往下就不建议堆太多层级了——网页不是论文目录，读者不会为了找第 4.2.3 节而耐心翻页。</p>
+<hr>
+<h2 id="正文里的基础样式">正文里的基础样式</h2>
+<p>普通段落用 <strong>serif</strong> 字体，链接会回到 <a href="/blog">文章列表</a>，也可以跳到外部参考，例如 <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide</a>。如果你更习惯裸链接，也可以直接写 <a href="https://astro.build">https://astro.build</a>。</p>
+<p>强调有几种常见写法：</p>
+<ul>
+<li><strong>加粗</strong> 用来标记结论；</li>
+<li><em>斜体</em> 用来标记语气或不确定；</li>
+<li><em><strong>加粗加斜体</strong></em> 只留给真的很关键的句子；</li>
+<li><del>删除线</del> 表示已经放弃的旧想法；</li>
+<li><code>inline code</code> 表示文件名、命令或短代码片段；</li>
+<li><mark>高亮</mark> 适合临时提醒；</li>
+<li>H<sub>2</sub>O 这样的下标、E=mc<sup>2</sup> 这样的上标，以及 <abbr title="Application Programming Interface">API</abbr> 这类缩写说明，都可以混在正文里。</li>
+</ul>
+<p>快捷键示例：<kbd>⌘</kbd> + <kbd>S</kbd> 保存，<kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> 打开命令面板。</p>
+<hr>
+<h2 id="列表无序有序以及嵌套">列表：无序、有序，以及嵌套</h2>
+<h3 id="无序清单">无序清单</h3>
+<p>写网页内容时，我常会先列一个「不要做什么」：</p>
+<ul>
+<li>不要一屏只有一句话</li>
+<li>不要连续三个段落都不分段</li>
+<li>不要把表格当 Excel 直接贴上来
+<ul>
+<li>列太多时，考虑拆成两段</li>
+<li>或者改成列表</li>
+</ul>
+</li>
+<li>不要忘记给图片写说明</li>
+</ul>
+<h3 id="有序清单">有序清单</h3>
+<p>如果读者需要按步骤执行，就用数字：</p>
+<ol>
+<li>先写结论，再补论据</li>
+<li>每个二级标题下至少有一个完整段落</li>
+<li>需要对照的数据放进表格</li>
+<li>需要复用的命令放进代码框</li>
+<li>发布前在手机上看一遍</li>
+</ol>
+<h3 id="任务清单">任务清单</h3>
+<p>发布前的最后一轮检查：</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> 标题是否只表达一个主题</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> 图片是否有 alt 和说明</li>
+<li class="task-list-item"><input type="checkbox" disabled> 表格是否在窄屏可横向滚动</li>
+<li class="task-list-item"><input type="checkbox" disabled> 代码块是否标注语言</li>
+</ul>
+<hr>
+<h2 id="引用把别人的话和自己的判断分开">引用：把别人的话和自己的判断分开</h2>
+<blockquote>
+<p>好的写作不是把全部思考过程写出来，而是把 <strong>思考的结果</strong> 写清楚，同时保留足够线索，让读者知道你是如何到达这里的。</p>
+<p>—— 这句是我编的，但很像我在改稿时会提醒自己的话。</p>
+</blockquote>
+<p>引用块适合放：<strong>原话、反例、需要被单独看见的判断</strong>。不要整篇都用引用，否则页面会像聊天记录。</p>
+<p align="center">居中的一句话总结：<strong>引用负责「停一下」，正文负责「继续走」。</strong></p>
+<p align="left">左对齐段落继续往下写。大多数正文都应该保持默认左对齐，这样在手机上也最自然。</p>
+<p align="right">右对齐更适合署名、日期或一句收束。—— 2026.05</p>
+<hr>
+<h2 id="表格把对照关系写清楚">表格：把对照关系写清楚</h2>
+<p>下面这张表不是业务数据，而是 <strong>段落类型</strong> 与 <strong>适用场景</strong> 的对照。注意表头左对齐、数字列右对齐的写法：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">元素</th><th align="left">适合做什么</th><th align="left">不适合做什么</th><th align="right">优先级</th></tr></thead><tbody><tr><td align="left">段落</td><td align="left">展开论证</td><td align="left">堆参数</td><td align="right">1</td></tr><tr><td align="left">小标题</td><td align="left">切分结构</td><td align="left">代替段落</td><td align="right">2</td></tr><tr><td align="left">表格</td><td align="left">横向比较</td><td align="left">讲故事</td><td align="right">3</td></tr><tr><td align="left">代码块</td><td align="left">可复制步骤</td><td align="left">写长段观点</td><td align="right">4</td></tr><tr><td align="left">配图</td><td align="left">建立直觉</td><td align="left">替代文字</td><td align="right">5</td></tr></tbody></table>
+<p>表格行数不必多，<strong>三到五行</strong> 往往最耐看。列太多时，详情页会自动允许横向滚动，这正是我们需要测试的行为之一。</p>
+<hr>
+<h2 id="代码块给可复用的内容">代码块：给「可复用」的内容</h2>
+<p>Inline code 适合 <code>package.json</code>、<code>astro.config.mjs</code> 这种短名字。整段命令或脚本，则应该放进代码框：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> estimateReadingBlocks</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">paragraphs</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> paragraphs.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(Boolean).</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">text</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">index</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> ({</span></span>
+<span class="line"><span style="color:#E1E4E8">    id: index </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    kind: text.</span><span style="color:#B392F0">startsWith</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">?</span><span style="color:#9ECBFF"> "heading"</span><span style="color:#F97583"> :</span><span style="color:#9ECBFF"> "body"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    length: text.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  }));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">estimateReadingBlocks</span><span style="color:#E1E4E8">([</span></span>
+<span class="line"><span style="color:#9ECBFF">  "## 示例"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">  "这是一段用于测试代码高亮的正文。"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">]));</span></span></code></pre>
+<p>如果需要终端命令，也可以单独放一段：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">pnpm</span><span style="color:#9ECBFF"> dev</span></span>
+<span class="line"><span style="color:#6A737D"># 本地打开文章详情页，检查 prose 样式</span></span>
+<span class="line"><span style="color:#B392F0">open</span><span style="color:#9ECBFF"> http://localhost:4321/blog/14-写给人看的页面/</span></span></code></pre>
+<hr>
+<h2 id="强调框把请注意从正文里拎出来">强调框：把「请注意」从正文里拎出来</h2>
+<p>模板没有单独的 Callout 组件时，我会用一个小型 aside 来放 <strong>提醒、结论或反常识判断</strong>：</p>
+<aside class="my-8 rounded-xl border border-zinc-300/80 bg-zinc-100/70 px-5 py-4 dark:border-emerald-800/80 dark:bg-emerald-950/25">
+  <p class="mb-2 font-sans text-sm font-semibold text-black dark:text-white">✅ 小结</p>
+  <p class="font-serif text-sm leading-relaxed text-zinc-700 dark:text-emerald-100/90">如果一篇文章需要读者记住一件事，那就把这件事写进一个小框里。不要指望读者从八段文字里自己提炼。</p>
+</aside>
+<p>这类框不宜太多。一篇长文里 <strong>一到两个</strong> 就足够。</p>
+<hr>
+<h2 id="配图放在段落之间而不是段落中间">配图：放在段落之间，而不是段落中间</h2>
+<p>第二张图放在后半段，用来表达「结构」而不是「情绪」。好的配图应该让读者看完文字后，<strong>更快理解关系</strong>，而不是打断阅读节奏。</p>
+<figure>
+  <img src="./assets/outline-flow.svg" alt="文章结构流程示意：问题、判断、行动与段落组织">
+  <figcaption>图 2：我常用的结构骨架——先问题，再判断，最后行动；中间用表格、代码和引用做支撑。</figcaption>
+</figure>
+<p>图片说明（figcaption）很重要。它不负责重复 alt 文本，而是告诉读者 <strong>这张图在论证什么</strong>。</p>
+<hr>
+<h2 id="脚注分割线与空白">脚注、分割线与空白</h2>
+<p>有些补充信息不适合放进正文，比如术语来源、延伸阅读。可以用脚注 <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>，再在文末统一解释 <sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup>。</p>
+<hr>
+<h3 id="空行与空段">空行与空段</h3>
+<p>下面故意留一点空白。</p>
+<p>再从这里继续。空行不是浪费，而是 <strong>呼吸</strong>。尤其在手机屏幕上，连续五段没有停顿，读者很容易中途退出。</p>
+<hr>
+<h2 id="emoji链接与最后检查">Emoji、链接与最后检查</h2>
+<p>Emoji 可以用，但别让它替代信息。✨ 适合表达情绪，📌 适合标记重点，⚠️ 适合提醒。若整段都是 Emoji，读者会以为你在发群聊。</p>
+<p>最后再列几个容易忽略的渲染点：</p>
+<ol>
+<li><strong>超链接</strong> 是否可点、hover 是否正常</li>
+<li><strong>加粗</strong> 在深色模式下是否仍然清晰</li>
+<li><strong>表格</strong> 是否不会把页面撑破</li>
+<li><strong>代码块</strong> 是否能在窄屏横向滚动</li>
+<li><strong>图片</strong> 是否居中、是否不会溢出</li>
+</ol>
+<hr>
+<h2 id="结语">结语</h2>
+<p>如果这篇「样式备忘」读起来仍然像一篇正常文章，而不是测试清单，那说明排版是 <strong>为内容服务</strong> 的。反过来，如果某一类元素看起来特别突兀——比如表格太宽、引用太亮、代码框太挤——那就回到 <code>global.css</code> 和 <code>prose</code> 配置里微调。</p>
+<p>你可以把这篇当作 <strong>文章详情页</strong> 的基准样张；项目详情页若也需要同样效果，把正文结构复制过去即可。欢迎边读边对照：哪些地方顺眼，哪些地方还需要改。</p>
+<p align="center"><em>Happy writing.</em> 🌿</p>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>脚注适合放出处、版本号、容易过时的细节。 <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-2">
+<p>如果脚注太多，说明正文可能还不够聚焦。 <a href="#user-content-fnref-2" data-footnote-backref="" aria-label="Back to reference 2" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section> </article>  </div>   </main> <!-- 页脚日/月光晕：SVG feGaussianBlur（沿图标轮廓；filter 区域 objectBoundingBox 2.5×，避免 340% 撑宽） --><svg aria-hidden="true" class="footer-theme-filters" focusable="false"> <defs> <filter id="footer-sun-halo" filterUnits="objectBoundingBox" x="-0.75" y="-0.75" width="2.5" height="2.5" color-interpolation-filters="sRGB"> <feGaussianBlur in="SourceAlpha" stdDeviation="3.5" result="blur-outer"></feGaussianBlur> <feFlood flood-color="#ff9500" flood-opacity="0.35" result="color-outer"></feFlood> <feComposite in="color-outer" in2="blur-outer" operator="in" result="glow-outer"></feComposite> <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="blur-inner"></feGaussianBlur> <feFlood flood-color="#ff7801" flood-opacity="0.95" result="color-inner"></feFlood> <feComposite in="color-inner" in2="blur-inner" operator="in" result="glow-inner"></feComposite> <feMerge> <feMergeNode in="glow-outer"></feMergeNode> <feMergeNode in="glow-inner"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> <filter id="footer-moon-halo" filterUnits="objectBoundingBox" x="-0.75" y="-0.75" width="2.5" height="2.5" color-interpolation-filters="sRGB"> <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur-outer"></feGaussianBlur> <feFlood flood-color="#b2ff47" flood-opacity="0.5" result="color-outer"></feFlood> <feComposite in="color-outer" in2="blur-outer" operator="in" result="glow-outer"></feComposite> <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur-inner"></feGaussianBlur> <feFlood flood-color="#e8ff47" flood-opacity="0.95" result="color-inner"></feFlood> <feComposite in="color-inner" in2="blur-inner" operator="in" result="glow-inner"></feComposite> <feMerge> <feMergeNode in="glow-outer"></feMergeNode> <feMergeNode in="glow-inner"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> </svg> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-5">  <div class="relative"> <div class="absolute right-0 -top-20"> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+回到顶部
+</div> </button> </div> </div> <div class="flex justify-between items-center"> <div>
+&copy; 2026 | JAMES </div> <div class="footer-theme-controls flex flex-wrap gap-1 items-center"> <button id="light-theme-button" aria-label="Light theme" class="group footer-theme-btn footer-theme-btn--sun size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="footer-theme-icon group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <g class="footer-theme-glow"> <circle cx="12" cy="12" r="5" class="footer-theme-core footer-theme-core--sun" stroke="none"></circle> <circle cx="12" cy="12" r="5" class="footer-theme-stroke"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </g> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group footer-theme-btn footer-theme-btn--moon size-8 flex items-center justify-center rounded-full"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="footer-theme-icon group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"> <g class="footer-theme-glow"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="footer-theme-core footer-theme-core--moon" stroke="none"></path> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="footer-theme-stroke" fill="none"></path> </g> </svg> </button> <!--
+        [显示器按键：色彩主题跟随系统]
+        <button
+          id="system-theme-button"
+          aria-label="System theme"
+          class="group size-8 flex items-center justify-center rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </button>
+
+        --> </div> </div>  </div> </footer> <div id="reading-progress" aria-hidden="true"> <div id="reading-progress-track"></div> <div id="reading-progress-fill"></div> </div> <script>
+  let readingProgressRaf = null;
+
+  function getScrollTop() {
+    return (
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
+    );
+  }
+
+  function getScrollMax() {
+    const doc = document.documentElement;
+    return Math.max(0, doc.scrollHeight - window.innerHeight);
+  }
+
+  function updateReadingProgress() {
+    const fill = document.getElementById("reading-progress-fill");
+    if (!fill) return;
+
+    const max = getScrollMax();
+    const progress = max > 0 ? Math.min(1, getScrollTop() / max) : 0;
+    fill.style.width = `${progress * 100}%`;
+  }
+
+  function onReadingProgressScroll() {
+    if (readingProgressRaf) return;
+    readingProgressRaf = requestAnimationFrame(() => {
+      updateReadingProgress();
+      readingProgressRaf = null;
+    });
+  }
+
+  function initReadingProgress() {
+    const bar = document.getElementById("reading-progress");
+    if (!bar) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      bar.style.display = "none";
+      return;
+    }
+
+    bar.style.display = "";
+
+    if (!window.__readingProgressBound) {
+      window.__readingProgressBound = true;
+      document.addEventListener("scroll", onReadingProgressScroll, {
+        passive: true,
+        capture: true,
+      });
+      window.addEventListener("resize", onReadingProgressScroll, { passive: true });
+      window.addEventListener("orientationchange", onReadingProgressScroll, {
+        passive: true,
+      });
+    }
+
+    updateReadingProgress();
+  }
+
+  document.addEventListener("DOMContentLoaded", initReadingProgress);
+  initReadingProgress();
+</script> <div id="theme-transition-overlay" aria-hidden="true"></div> </body></html>
