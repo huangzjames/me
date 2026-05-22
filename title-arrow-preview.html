@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>标题箭头样式预览</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f4f5;
+        --text: #000;
+        --muted: rgba(0, 0, 0, 0.55);
+        --desc: rgba(0, 0, 0, 0.75);
+        --border: rgba(0, 0, 0, 0.15);
+        --hover: #dba04f;
+        --card: #fff;
+      }
+
+      html.dark {
+        --bg: #0c0a09;
+        --text: #fff;
+        --muted: rgba(255, 255, 255, 0.55);
+        --desc: rgba(255, 255, 255, 0.75);
+        --border: rgba(255, 255, 255, 0.2);
+        --hover: #daff47;
+        --card: #1c1917;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem 1.25rem 3rem;
+        font-family: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+      }
+
+      .note {
+        max-width: 40rem;
+        font-size: 0.875rem;
+        opacity: 0.75;
+        margin-bottom: 1.5rem;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      button {
+        font: inherit;
+        font-size: 0.875rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+        max-width: 42rem;
+      }
+
+      .option {
+        padding: 1rem 1.1rem;
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        background: var(--card);
+      }
+
+      .option-id {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        opacity: 0.55;
+        margin-bottom: 0.75rem;
+      }
+
+      .sample-subtitle {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        opacity: 0.55;
+        margin: 0.25rem 0 0.625rem;
+      }
+
+      .sample-desc {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        opacity: 0.75;
+        margin: 0;
+      }
+
+      .title-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        width: fit-content;
+        font-weight: 600;
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .title-link:hover {
+        color: var(--hover);
+      }
+
+      /* A · 细 chevron 字符，常显 */
+      .arrow-a::after {
+        content: "›";
+        font-size: 1.05em;
+        line-height: 1;
+        opacity: 0.42;
+        transform: translateY(-0.02em);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow-a:hover::after {
+        opacity: 0.9;
+        transform: translate(2px, -0.02em);
+      }
+
+      /* B · Unicode 箭头，常显 */
+      .arrow-b::after {
+        content: "→";
+        font-size: 0.9em;
+        opacity: 0.38;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow-b:hover::after {
+        opacity: 0.85;
+        transform: translateX(3px);
+      }
+
+      /* C · SVG 线+尖角，hover 时线条展开（类似旧 ArrowCard） */
+      .arrow-c {
+        gap: 0.2rem;
+      }
+
+      .arrow-c .svg-arrow {
+        width: 1rem;
+        height: 1rem;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        opacity: 0.45;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow-c .svg-arrow line {
+        transition: transform 0.3s ease;
+        transform: translateX(-3px) scaleX(0);
+        transform-origin: left center;
+      }
+
+      .arrow-c:hover .svg-arrow {
+        opacity: 0.95;
+        transform: translateX(2px);
+      }
+
+      .arrow-c:hover .svg-arrow line {
+        transform: translateX(0) scaleX(1);
+      }
+
+      /* D · 仅 hover 时出现箭头 */
+      .arrow-d::after {
+        content: "→";
+        font-size: 0.88em;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .arrow-d:hover::after {
+        opacity: 0.85;
+        transform: translateX(0);
+      }
+
+      /* E · em dash + 箭头，编辑风格 */
+      .arrow-e::after {
+        content: "— →";
+        font-size: 0.82em;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        opacity: 0.32;
+        transition: opacity 0.3s ease;
+      }
+
+      .arrow-e:hover::after {
+        opacity: 0.75;
+      }
+
+      /* F · 小圆点 + 微型箭头 */
+      .arrow-f::after {
+        content: "";
+        display: inline-block;
+        width: 0.95rem;
+        height: 0.95rem;
+        margin-left: 0.15rem;
+        border-radius: 999px;
+        border: 1px solid currentColor;
+        opacity: 0.28;
+        background:
+          linear-gradient(currentColor, currentColor) calc(50% - 3px) center / 5px 1px
+            no-repeat,
+          linear-gradient(currentColor, currentColor) 62% 42% / 4px 1px no-repeat;
+        transform: rotate(45deg);
+        background-color: transparent;
+        vertical-align: -0.05em;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow-f:hover::after {
+        opacity: 0.8;
+        transform: translateX(2px) rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>标题末尾箭头 · 样式预览</h1>
+    <p class="note">
+      模拟首页 / 目录列表：只有标题可点击，简介不可点。把鼠标移到标题上看 hover
+      效果。选好样式后告诉我编号（A–F）。
+    </p>
+
+    <div class="toolbar">
+      <button type="button" id="toggle-theme">切换浅色 / 深色</button>
+    </div>
+
+    <div class="grid">
+      <section class="option">
+        <div class="option-id">A · 细 Chevron 「›」常显，hover 右移</div>
+        <a href="#" class="title-link arrow-a" onclick="return false"
+          >当 Agent 成为标配，产品真正争什么</a
+        >
+        <p class="sample-subtitle">Agent 产品 · 竞争格局</p>
+        <p class="sample-desc">
+          当模型、RAG 和工具调用逐一成为标配，产品还能靠什么建立长期价值？
+        </p>
+      </section>
+
+      <section class="option">
+        <div class="option-id">B · Unicode 「→」常显，hover 右移</div>
+        <a href="#" class="title-link arrow-b" onclick="return false"
+          >README：Career Coach</a
+        >
+        <p class="sample-subtitle">Agent 协作 · 长期任务</p>
+        <p class="sample-desc">
+          围绕数周至数月的求职准备，用本地 Markdown 与 coding agent 搭建状态看板。
+        </p>
+      </section>
+
+      <section class="option">
+        <div class="option-id">C · SVG 线+尖角，hover 时横线展开（旧 ArrowCard 风格）</div>
+        <a href="#" class="title-link arrow-c" onclick="return false">
+          <span>如果 Codex 要走出代码项目</span>
+          <svg class="svg-arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <p class="sample-subtitle">Coding Agent · 产品结构</p>
+        <p class="sample-desc">
+          任务往往从材料里长出来，而不是从输入框里长出来。
+        </p>
+      </section>
+
+      <section class="option">
+        <div class="option-id">D · 仅 hover 时出现 「→」</div>
+        <a href="#" class="title-link arrow-d" onclick="return false"
+          >Agent 产品机会与护城河</a
+        >
+        <p class="sample-subtitle">产品框架 · 机会判断</p>
+        <p class="sample-desc">
+          一把判断 Agent 方向值不值得做的四问框架。
+        </p>
+      </section>
+
+      <section class="option">
+        <div class="option-id">E · Em dash + 箭头 「— →」编辑风</div>
+        <a href="#" class="title-link arrow-e" onclick="return false"
+          >产品分析：OpenClaw &amp; WorkBuddy</a
+        >
+        <p class="sample-subtitle">产品分析 · 执行型 Agent</p>
+        <p class="sample-desc">
+          以 WorkBuddy 和 OpenClaw 为样本，分析执行型 Agent 能否被放心委托。
+        </p>
+      </section>
+
+      <section class="option">
+        <div class="option-id">F · 空心小圆 + 箭头（按钮感）</div>
+        <a href="#" class="title-link arrow-f" onclick="return false"
+          >Agent 的下一步：从回答问题到让事情顺理成章地发生</a
+        >
+        <p class="sample-subtitle">Agent 产品 · 体验方向</p>
+        <p class="sample-desc">
+          好 Agent 也许像管家：不替你做决定，却在合适的时刻把该看的东西摆到面前。
+        </p>
+      </section>
+    </div>
+
+    <script>
+      document.getElementById("toggle-theme").addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+      });
+    </script>
+  </body>
+</html>
